@@ -9,5 +9,6 @@ before_install:
   - docker build -t fxabreu/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run fxabreu/docker-react npm cache clear
-  - docker run -e CI=true fxabreu/docker-react npm run test -- --coverage
+ # - docker run fxabreu/docker-react npm cache clear
+ # - docker run -e CI=true fxabreu/docker-react npm run test -- --coverage
+  - docker run -e CI=true fxabreu/docker-react npm run test
