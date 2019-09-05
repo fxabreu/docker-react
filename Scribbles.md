@@ -94,6 +94,7 @@ COPY --from=builder /app/build /usr/share/nginx/html
 
 #Travis CI
 language: generic, node_js # not included in the initial code, but added to fix build failure
+
 sudo: required #tell travis we need super user access to run our tests
 services:
   - docker # tell travis to initialize  docker instance
@@ -103,3 +104,5 @@ before_install: # steps for building the project
 
 script: # steps to execute after the code is built and ready for testing
   - docker run fxabreu/docker-react npm run test -- --coverage
+# added "-e CI=true" to attempt fix build failures
+  - docker run -e CI=true fxabreu/docker-react npm run test -- --coverage
