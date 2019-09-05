@@ -93,7 +93,7 @@ FROM nginx
 COPY --from=builder /app/build /usr/share/nginx/html
 
 #Travis CI
-language: generic # not included in the initial code, but added to fix build failure
+language: generic, node_js # not included in the initial code, but added to fix build failure
 sudo: required #tell travis we need super user access to run our tests
 services:
   - docker # tell travis to initialize  docker instance
