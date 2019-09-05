@@ -91,3 +91,14 @@ FROM nginx
 # copy something from a different phase
 # COPY --from=<phase>
 COPY --from=builder /app/build /usr/share/nginx/html
+
+#Travis CI
+sudo: required #tell travis we need super user access to run our tests
+services:
+  - docker # tell travis to initialize  docker instance
+
+before_install: # steps for building the project
+  - docker build -t fxabreu/docker-react -f Dockerfile.dev .
+
+script: # steps to execute after the code is built and ready for testing
+  - docker run fxabreu/docker-react npm run test -- --coverage
